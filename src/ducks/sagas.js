@@ -4,6 +4,6 @@ import wikipedia from './wikipedia'
 
 export default function * root () {
   yield all([
-    ...wikipedia.sagas.watchers,
+    ...wikipedia.sagas.watchers
   ])
 }
