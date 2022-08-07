@@ -1,3 +1,17 @@
+import { configureStore, getDefaultMiddleware } from 'redux-starter-kit'
+import createSagaMiddleware from 'redux-saga'
+
+import reducers from './ducks/reducers'
+import rootSaga from './ducks/sagas'
+
+const sagaMiddleware = createSagaMiddleware()
+export const store = configureStore({
+  reducer: reducers,
+  middleware: [...getDefaultMiddleware(), sagaMiddleware]
+})
+
+sagaMiddleware.run(rootSaga)
+
 function App () {
   return (
     <div className='App'>

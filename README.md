@@ -6,3 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - create-react-app
 - styled-components
 - standard.js
+
+### key todos
+- [ ] redux saga
+- [ ] stats middleware
