@@ -6,7 +6,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - create-react-app
 - styled-components
 - standard.js
+- redux-saga
 
 ### key todos
-- [ ] redux saga
+- [x] redux saga
 - [ ] stats middleware
+- [ ] add some cool gradients
