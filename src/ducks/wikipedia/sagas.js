@@ -3,6 +3,7 @@ import lodashGet from 'lodash/get'
 
 import * as wikipediaActionTypes from './actionTypes'
 import * as wikipediaApi from './api'
+import * as wikipediaSerializers from './serializers'
 
 function * getPageviews (action) {
   const { day, month, year } = action
@@ -19,6 +20,9 @@ function * getPageviews (action) {
     yield put({ type: wikipediaActionTypes.GET_PAGEVIEWS_ERROR, error })
   } else {
     const articles = lodashGet(data, 'items[0].articles')
+      .filter(wikipediaSerializers.filterArticle)
+      .map(wikipediaSerializers.deserializeArticle)
+      .sort((a, b) => a.rank > b.rank)
     yield put({ type: wikipediaActionTypes.GET_PAGEVIEWS_SUCCESS, articles })
   }
 }

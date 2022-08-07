@@ -1,11 +1,58 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
-import wikipediaDucks from '../ducks/wikipedia'
+import { device } from '../styles/theme'
+import Articles from './articles'
+import Filters from './filters'
+
+const StyledBodyContainer = styled.div`
+  background-color:  ${props => props.theme.colors.darkPurple};
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 0 32px;
+  position: relative;
+
+  &::before {
+    background-size: contain;
+    background: url("background.svg") no-repeat top center;
+    content: "";
+    display: block;
+    height: auto;
+    left: 0px;
+    margin: 0 auto;
+    max-width: 100vw;
+    min-height: 100vw;
+    min-width: 768px;
+    opacity: 0.92;
+    pointer-events: none;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+  }
+
+  .content-container {
+    padding: 0 32px;
+  }
+`
 
 const StyledHeader = styled.div`
-  background-color: ${props => props.theme.colors.grey0};
+  align-items: center;
+  display: flex;
+  height: 96px;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 768px;
+
+  h1 {
+    color: ${props => props.theme.colors.white};
+    font-size: 36px;
+  }
+
+  @media ${device.tablet} {
+    h1 {
+      font-size: 28px;
+    }
+  }
 `
 
 const Header = () => (
@@ -14,36 +61,12 @@ const Header = () => (
   </StyledHeader>
 )
 
-const Container = () => {
-  const dispatch = useDispatch()
-
-  const articles = useSelector(wikipediaDucks.selectors.articles)
-  const error = useSelector(wikipediaDucks.selectors.error)
-  const loading = useSelector(wikipediaDucks.selectors.loading)
-  const success = useSelector(wikipediaDucks.selectors.success)
-
-  useEffect(() => {
-    const shouldFetch = (
-      articles.length === 0 &&
-      !error &&
-      !loading &&
-      !success
-    )
-
-    if (shouldFetch) {
-      dispatch(wikipediaDucks.actions.getPageviews({ day: '31', month: '03', year: '2019' }))
-    }
-  }, [articles, dispatch, error, loading, success])
-
-  console.log({ articles })
-
-  return (
-    <Component />
-  )
-}
-
 const Component = () => (
-  <Header />
+  <StyledBodyContainer>
+    <Header />
+    <Filters />
+    <Articles />
+  </StyledBodyContainer>
 )
 
-export default Container
+export default Component
