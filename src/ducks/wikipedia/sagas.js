@@ -27,4 +27,4 @@ const watchers = [
   takeLatest(wikipediaActionTypes.GET_PAGEVIEWS, getPageviews)
 ]
 
-export { watchers }
+export { getPageviews, watchers }

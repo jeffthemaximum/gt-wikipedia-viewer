@@ -49,5 +49,8 @@
     "env": [
       "jest"
     ]
+  },
+  "devDependencies": {
+    "@redux-saga/testing-utils": "^1.1.3"
   }
 }
