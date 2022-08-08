@@ -61,7 +61,7 @@ describe('sagas', () => {
     }
 
     const errorResponse = { error: mockString() }
-    const successResponse = { items: [{ articles: [mockString()] }] }
+    const successResponse = { data: { items: [{ articles: [{ views: mockString(), article: mockString(), rank: mockString() }] }] } }
 
     const data = {
       gen: cloneableGenerator(wikipediaDucks.sagas.getPageviews)(action)
@@ -88,7 +88,7 @@ describe('sagas', () => {
     it('puts wikipediaDucks.actionTypes.GET_PAGEVIEWS_SUCCESS when api returns success', () => {
       const expectedValue = put({
         type: wikipediaDucks.actionTypes.GET_PAGEVIEWS_SUCCESS,
-        articles: successResponse.articles
+        articles: successResponse.data.items[0].articles.map(wikipediaDucks.serializers.deserializeArticle)
       })
 
       const testValue = data.clone.next(successResponse).value

@@ -3,6 +3,7 @@ import * as actionTypes from './actionTypes'
 import * as api from './api'
 import * as sagas from './sagas'
 import * as selectors from './selectors'
+import * as serializers from './serializers'
 import reducer from './reducer'
 
 const duck = {
@@ -11,7 +12,8 @@ const duck = {
   api,
   reducer,
   sagas,
-  selectors
+  selectors,
+  serializers
 }
 
 export default duck
