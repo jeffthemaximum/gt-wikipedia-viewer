@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { device } from '../styles/theme'
 import { formattedToParts } from '../services/dateHelpers'
 import ErrorMessage from './common/errorMessage'
 import Loader from './common/loader'
@@ -29,6 +30,7 @@ const StyledArticles = styled.div`
     justify-content: space-between;
     margin-bottom: 16px;
     padding: 8px 16px;
+    word-break: break-all;
 
     &:hover {
       box-shadow: rgb(12 10 29 / 32%) 0px 2px 8px 4px;
@@ -37,6 +39,16 @@ const StyledArticles = styled.div`
 
   .article-metadata {
     text-align: right;
+  }
+
+  @media ${device.tablet} {
+    p {
+      font-size: 12px;
+    }
+
+    .article-card {
+      padding: 4px 8px;
+    }
   }
 `
 
