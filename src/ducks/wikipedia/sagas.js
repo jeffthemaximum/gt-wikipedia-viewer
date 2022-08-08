@@ -6,9 +6,10 @@ import * as wikipediaApi from './api'
 import * as wikipediaSerializers from './serializers'
 
 function * getPageviews (action) {
-  const { day, month, year } = action
+  const { country, day, month, year } = action
 
   const response = yield call(wikipediaApi.getPageviews, {
+    country,
     day,
     month,
     year

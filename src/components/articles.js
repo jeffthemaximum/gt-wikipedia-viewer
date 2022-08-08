@@ -54,6 +54,7 @@ const Container = () => {
   const dispatch = useDispatch()
 
   const [searchParams] = useSearchParams()
+  const country = searchParams.get('country')
   const date = searchParams.get('date')
   const dateParts = formattedToParts(date)
   const limit = searchParams.get('limit')
@@ -63,6 +64,7 @@ const Container = () => {
   const loading = useSelector(wikipediaDucks.selectors.loading)
   const success = useSelector(wikipediaDucks.selectors.success)
 
+  const previousCountry = usePrevious(country)
   const previousDay = usePrevious(dateParts.day)
   const previousMonth = usePrevious(dateParts.month)
   const previousYear = usePrevious(dateParts.year)
@@ -88,20 +90,23 @@ const Container = () => {
       (
         dateParts.day !== previousDay ||
         dateParts.month !== previousMonth ||
-        dateParts.year !== previousYear
+        dateParts.year !== previousYear ||
+        country !== previousCountry
       )
     )
 
     if (shouldInitialFetch || shouldReFetch) {
-      dispatch(wikipediaDucks.actions.getPageviews({ day: dateParts.day, month: dateParts.month, year: dateParts.year }))
+      dispatch(wikipediaDucks.actions.getPageviews({ country, day: dateParts.day, month: dateParts.month, year: dateParts.year }))
     }
   }, [
     articles,
+    country,
     dateParts.day,
     dateParts.month,
     dateParts.year, dispatch,
     error,
     loading,
+    previousCountry,
     previousDay,
     previousMonth,
     previousYear,

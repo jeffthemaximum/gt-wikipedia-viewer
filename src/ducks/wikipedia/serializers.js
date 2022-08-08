@@ -5,7 +5,7 @@ export const filterArticle = article => {
 export const deserializeArticle = article => {
   return {
     title: article.article,
-    views: article.views,
+    views: article.views || article.views_ceil,
     rank: article.rank
   }
 }
