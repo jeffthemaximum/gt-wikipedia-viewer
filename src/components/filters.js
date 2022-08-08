@@ -269,11 +269,17 @@ const limitSelectOptions = [
   { value: 200, displayName: 200 }
 ]
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin: 0 auto;
   max-width: 768px;
+
+  .filter-container {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+  }
 `
 
 const getAllSearchParams = searchParams => {
@@ -348,9 +354,33 @@ const Container = () => {
 
 const Component = ({ country, date, handleCountryChange, handleDateChange, handleLimitChange, limit, max }) => (
   <StyledContainer>
-    {date && <DateSelector date={date} max={max} onChange={handleDateChange} />}
-    <SelectInput firstBlank='All Countries' onChange={handleCountryChange} options={countrySelectOptions} value={country} />
-    {limit && <SelectInput onChange={handleLimitChange} options={limitSelectOptions} value={limit} />}
+    <div className='filter-container'>
+      {date && (
+        <DateSelector
+          date={date}
+          max={max}
+          onChange={handleDateChange}
+          title={"Start date:"}
+        />
+      )}
+      {limit && (
+        <SelectInput
+          onChange={handleLimitChange}
+          options={limitSelectOptions}
+          title={"Limit"}
+          value={limit}
+        />
+      )}
+    </div>
+    <div className='filter-container'>
+      <SelectInput
+        firstBlank='All Countries'
+        onChange={handleCountryChange}
+        options={countrySelectOptions}
+        title={"Country"}
+        value={country}
+      />
+    </div>
   </StyledContainer>
 )
 

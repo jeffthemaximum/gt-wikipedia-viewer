@@ -44,7 +44,7 @@ const StyledHeader = styled.div`
   max-width: 768px;
 
   h1 {
-    color: ${props => props.theme.colors.white};
+    color: ${props => props.theme?.colors?.white};
     font-size: 36px;
   }
 
@@ -55,7 +55,7 @@ const StyledHeader = styled.div`
   }
 `
 
-const Header = () => (
+export const Header = () => (
   <StyledHeader>
     <h1>Grow Take Home</h1>
   </StyledHeader>
