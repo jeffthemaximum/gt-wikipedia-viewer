@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 
+const StyledContainer = styled.div`
+  margin: 0 auto;
+  max-width: 768px;
+`
+
 // https://loading.io/css/
 const StyledLoader = styled.div`
   display: inline-block;
@@ -43,7 +48,7 @@ const StyledLoader = styled.div`
 `
 
 const Loader = ({ loading }) => (
-  (loading ? <StyledLoader><div /><div /><div /><div /></StyledLoader> : undefined)
+  (loading ? <StyledContainer><StyledLoader><div /><div /><div /><div /></StyledLoader></StyledContainer> : undefined)
 )
 
 export default Loader
