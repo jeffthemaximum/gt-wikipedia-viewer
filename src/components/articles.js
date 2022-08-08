@@ -44,8 +44,8 @@ const Article = ({ article }) => (
   <div className='article-card'>
     <p className='article-title'>{article.title}</p>
     <div className='article-metadata'>
-      <p className='article-metadata-title'>Views</p>
-      <p className='article-metadata-datum'>{article.views}</p>
+      <p className='article-metadata-title'>Views: {article.views}</p>
+      <p className='article-metadata-title'>Rank: {article.rank}</p>
     </div>
   </div>
 )
@@ -56,8 +56,9 @@ const Container = () => {
   const [searchParams] = useSearchParams()
   const date = searchParams.get('date')
   const dateParts = formattedToParts(date)
+  const limit = searchParams.get('limit')
 
-  const articles = useSelector(wikipediaDucks.selectors.articles)
+  let articles = useSelector(wikipediaDucks.selectors.articles)
   const error = useSelector(wikipediaDucks.selectors.error)
   const loading = useSelector(wikipediaDucks.selectors.loading)
   const success = useSelector(wikipediaDucks.selectors.success)
@@ -65,6 +66,10 @@ const Container = () => {
   const previousDay = usePrevious(dateParts.day)
   const previousMonth = usePrevious(dateParts.month)
   const previousYear = usePrevious(dateParts.year)
+
+  if (limit) {
+    articles = [...articles].slice(0, parseInt(limit))
+  }
 
   useEffect(() => {
     const shouldInitialFetch = (

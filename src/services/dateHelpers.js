@@ -18,10 +18,17 @@ export function getFormattedYesterday () {
 }
 
 export function formattedToParts (formatted) {
+  const defaultReturn = { day: '', month: '', year: '' }
+
+  if (!formatted) {
+    return defaultReturn
+  }
+
   const parts = formatted.split('-')
   if (parts.length !== 3) {
-    return { day: '', month: '', year: '' }
+    return defaultReturn
   }
+
   const [year, month, day] = parts
   return { day, month, year }
 }
